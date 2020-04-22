@@ -34,4 +34,4 @@ npm install
 ````
 
 #### Start Application
-Once this is done, you can use `expo start` to run the project
+you can use `expo start` to run the project
