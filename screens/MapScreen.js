@@ -19,31 +19,29 @@ const MapScreen = props => {
 	const selectPickedLocation = props.navigation.getParam('pickedOriginSelectLocation');
 	const selectMapPickedLocation = props.navigation.getParam('pickedDestSelectLocation');
 
-	console.log('pickedLocation', pickedLocation);
-	console.log('mapPickedLocation', mapPickedLocation);
-	console.log('selectPickedLocation', selectPickedLocation);
-	console.log('selectMapPickedLocation', selectMapPickedLocation);
-
 	const mapRegion = {
 		latitude: mapPickedLocation ? mapPickedLocation.geometry.location.lat : selectMapPickedLocation.geometry.location.lat,
-		longitude: mapPickedLocation ? mapPickedLocation.geometry.location.lng : selectMapPickedLocation.geometry.location.lat,
-		latitudeDelta: LATITUDE_DELTA,
-		longitudeDelta: LONGITUDE_DELTA,
+		longitude: mapPickedLocation ? mapPickedLocation.geometry.location.lng : selectMapPickedLocation.geometry.location.lng,
+		latitudeDelta: 2,
+		longitudeDelta: 2,
 	};
 
 	let originLocation = null;
 	let destinationLocation = null;
 	if ((pickedLocation && mapPickedLocation) || (selectPickedLocation && selectMapPickedLocation)) {
 		originLocation = {
-			latitude: mapPickedLocation ? pickedLocation.lat : selectPickedLocation.geometry.location.lat,
-			longitude: mapPickedLocation ? pickedLocation.lng : selectPickedLocation.geometry.location.lat
+			latitude: pickedLocation ? pickedLocation.lat : selectPickedLocation.geometry.location.lat,
+			longitude: pickedLocation ? pickedLocation.lng : selectPickedLocation.geometry.location.lng
 		};
 
 		destinationLocation = {
 			latitude: mapPickedLocation ? mapPickedLocation.geometry.location.lat : selectMapPickedLocation.geometry.location.lat,
-			longitude: mapPickedLocation ? mapPickedLocation.geometry.location.lng : selectMapPickedLocation.geometry.location.lat
+			longitude: mapPickedLocation ? mapPickedLocation.geometry.location.lng : selectMapPickedLocation.geometry.location.lng
 		};
 	}
+
+	console.log('originLocation', originLocation);
+	console.log('destinationLocation', destinationLocation);
 
 	return (
 		<View style={styles.container}>
