@@ -48,8 +48,6 @@ const PlacesSearchInput = props => {
 }
 
 const styles = StyleSheet.create({
-	placeIcon: {
-	}
 });
 
 export default PlacesSearchInput;

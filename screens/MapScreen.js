@@ -1,26 +1,49 @@
-import React from 'react';
-import { StyleSheet, Dimensions, View, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Dimensions, View, Platform, Text } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
 
 import Colors from '../constants/Colors';
-import MapViewDirections from 'react-native-maps-directions';
 import ENV from '../env';
+
+const { width, height } = Dimensions.get('window');
+const ASPECT_RATIO = width / height;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const MapScreen = props => {
 
 	const pickedLocation = props.navigation.getParam('pickedOriginLocation');
 	const mapPickedLocation = props.navigation.getParam('pickedDestLocation');
 
-	console.log('props.navigation', props.navigation);
+	const selectPickedLocation = props.navigation.getParam('pickedOriginSelectLocation');
+	const selectMapPickedLocation = props.navigation.getParam('pickedDestSelectLocation');
+
 	console.log('pickedLocation', pickedLocation);
 	console.log('mapPickedLocation', mapPickedLocation);
+	console.log('selectPickedLocation', selectPickedLocation);
+	console.log('selectMapPickedLocation', selectMapPickedLocation);
 
 	const mapRegion = {
-		latitude: mapPickedLocation ? mapPickedLocation.geometry.location.lat : 6.902725,
-		longitude: mapPickedLocation ? mapPickedLocation.geometry.location.lng : 8.899389,
-		latitudeDelta: 0.0922,
-		longitudeDelta: 0.0421,
+		latitude: mapPickedLocation ? mapPickedLocation.geometry.location.lat : selectMapPickedLocation.geometry.location.lat,
+		longitude: mapPickedLocation ? mapPickedLocation.geometry.location.lng : selectMapPickedLocation.geometry.location.lat,
+		latitudeDelta: LATITUDE_DELTA,
+		longitudeDelta: LONGITUDE_DELTA,
 	};
+
+	let originLocation = null;
+	let destinationLocation = null;
+	if ((pickedLocation && mapPickedLocation) || (selectPickedLocation && selectMapPickedLocation)) {
+		originLocation = {
+			latitude: mapPickedLocation ? pickedLocation.lat : selectPickedLocation.geometry.location.lat,
+			longitude: mapPickedLocation ? pickedLocation.lng : selectPickedLocation.geometry.location.lat
+		};
+
+		destinationLocation = {
+			latitude: mapPickedLocation ? mapPickedLocation.geometry.location.lat : selectMapPickedLocation.geometry.location.lat,
+			longitude: mapPickedLocation ? mapPickedLocation.geometry.location.lng : selectMapPickedLocation.geometry.location.lat
+		};
+	}
 
 	return (
 		<View style={styles.container}>
@@ -29,14 +52,15 @@ const MapScreen = props => {
 				region={mapRegion}
 				provider="google"
 				zoomEnabled={true} >
-				<Marker title="Origin Location" coordinate={{ latitude: pickedLocation.lat, longitude: pickedLocation.lng }} />
-				<Marker title="Destination Location" coordinate={{ latitude: mapPickedLocation.geometry.location.lat, longitude: mapPickedLocation.geometry.location.lng }} />
+				<Marker title="Origin Location" coordinate={originLocation} />
+				<Marker title="Destination Location" coordinate={destinationLocation} />
 				<MapViewDirections
-					origin={{ latitude: pickedLocation.lat, longitude: pickedLocation.lng }}
-					destination={{ latitude: mapPickedLocation.geometry.location.lat, longitude: mapPickedLocation.geometry.location.lng }}
+					origin={originLocation}
+					destination={destinationLocation}
 					apikey={ENV().googleApiKey}
-					strokeWidth={3}
+					strokeWidth={4}
 					strokeColor="hotpink"
+					mode='DRIVING'
 				/>
 			</MapView>
 		</View >
@@ -47,8 +71,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center',
 	},
 	mapStyle: {
 		width: Dimensions.get('window').width,
@@ -60,6 +82,17 @@ const styles = StyleSheet.create({
 	headerButtonText: {
 		fontSize: 16,
 		color: Platform.OS === 'android' ? 'white' : Colors.primary
+	},
+	errorText: {
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	resultContainer: {
+		backgroundColor: '#fff',
+		borderRadius: 10
+	},
+	resultText: {
+		margin: 5
 	}
 });
 
