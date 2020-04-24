@@ -98,7 +98,7 @@ const MainNavigation = createDrawerNavigator({
 			drawerLabel: 'Search'
 		},
 	},
-	MapView: MapNavigator
+	MapView: MapNavigator,
 }, {
 	contentOptions: {
 		activeTintColor: Colors.accentColor,

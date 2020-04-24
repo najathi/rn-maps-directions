@@ -20,18 +20,8 @@ const MapViewScreen = props => {
 	const [pickedLocation, setPickedLocation] = useState();
 	const [destination, setDestination] = useState();
 
-	// const originLocation = { latitude: 37.3318456, longitude: -122.0296002 };
-	// const destinationLocation = { latitude: 37.771707, longitude: -122.4053769 };
-
 	console.log('pickedLocation', pickedLocation);
 	console.log('destination', destination);
-
-	// const mapRegion = {
-	// 	latitude: destination ? destination.geometry.location.lat : pickedLocation.lat,
-	// 	longitude: destination ? destination.geometry.location.lng : pickedLocation.lng,
-	// 	latitudeDelta: 2,
-	// 	longitudeDelta: 2,
-	// };
 
 	const mapRegion = {
 		latitude: pickedLocation ? pickedLocation.lat : 6.902725,
@@ -143,7 +133,7 @@ const MapViewScreen = props => {
 	);
 }
 
-MapViewScreen.navigationOptions = navigationData => {
+MapViewScreen.navigationOptions = navData => {
 	return {
 		headerTitle: 'Map View'
 	};

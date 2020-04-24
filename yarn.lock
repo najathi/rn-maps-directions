@@ -4356,6 +4356,11 @@ react-native-places-input@^1.1.2:
   dependencies:
     prop-types "^15.7.2"
 
+react-native-platform-touchable@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-platform-touchable/-/react-native-platform-touchable-1.1.1.tgz#fde4acc65eea585d28b164d0c3716a42129a68e4"
+  integrity sha1-/eSsxl7qWF0osWTQw3FqQhKaaOQ=
+
 react-native-reanimated@^1.7.1:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.8.0.tgz#0b5719b20c1fed9aaf8afd9a12e21c9bd46ee428"
@@ -4446,6 +4451,13 @@ react-navigation-drawer@^2.4.12:
   version "2.4.12"
   resolved "https://registry.yarnpkg.com/react-navigation-drawer/-/react-navigation-drawer-2.4.12.tgz#35eb1c34749119f5089e50fa1c374028413cda47"
   integrity sha512-3fv5+YbhWsu4RRDIUetXEniZtQ02frZuQp42zbkvZWk+uLApbEYpW5Aw/MNjNWA1BKoOjtmLCz2qyriZD6uQxQ==
+
+react-navigation-header-buttons@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/react-navigation-header-buttons/-/react-navigation-header-buttons-3.0.5.tgz#5b8c0fc32bc59382f02015e4b2f19a135b99dca4"
+  integrity sha512-b1AsL9k6Klp72CnAq4IF0xgw94FClBIsUr/pGUKa1PI+mStdF0AYZzi9qtYgqQNDIOpqxQ2xYUM9azL2VmPUeQ==
+  dependencies:
+    react-native-platform-touchable "^1.1.1"
 
 react-navigation-material-bottom-tabs@^2.2.11:
   version "2.2.11"

@@ -4,7 +4,6 @@ import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
 import PlacesNavigator from './navigation/PlacesNavigator';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const getFonts = () => Font.loadAsync({
   'Montserrat-Bold': require('./assets/fonts/Montserrat-Bold.otf'),

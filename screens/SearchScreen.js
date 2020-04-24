@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Platform, Button } from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import PlacesSearchInput from '../components/PlacesSearchInput';
+import HeaderButton from '../components/HeaderButton';
 
 const SearchScreen = props => {
 
@@ -77,6 +79,18 @@ const SearchScreen = props => {
 			</View>
 		</View>
 	);
+};
+
+SearchScreen.navigationOptions = navData => {
+	return {
+		headerLeft: (
+			<HeaderButtons HeaderButtonComponent={HeaderButton}>
+				<Item title="Menu" iconName='ios-menu' onPress={() => {
+					navData.navigation.toggleDrawer()
+				}} />
+			</HeaderButtons>
+		)
+	}
 };
 
 const styles = StyleSheet.create({
