@@ -40,8 +40,6 @@ const MapScreen = props => {
 		};
 	}
 
-	console.log('originLocation', originLocation);
-	console.log('destinationLocation', destinationLocation);
 
 	return (
 		<View style={styles.container}>
