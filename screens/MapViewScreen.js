@@ -127,7 +127,7 @@ const MapViewScreen = props => {
 				</View> : null}
 			</MapView>
 			<TouchableNative styleTouchable={styles.textContainer} onPressed={locationPickedHandler}>
-				<Ionicons name="md-locate" size={35} />
+				<Ionicons name="md-locate" size={30} />
 			</TouchableNative>
 		</View >
 	);
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
 		margin: 30,
 		backgroundColor: '#ccc',
 		padding: 15,
-		borderRadius: 80
+		borderRadius: 30
 	}
 });
 

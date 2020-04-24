@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Platform, Button } from 'react-native';
+import { View, StyleSheet, Platform, Button, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -55,29 +55,32 @@ const SearchScreen = props => {
 	}
 
 	return (
-		<View style={styles.container}>
-			<View style={{ ...styles.inputContainer }}>
-				<PlacesSearchInput placeHolder="Search Start Place..." place={onOriginHandler} />
-				<PlacesSearchInput placeHolder="Search Destination Place..." place={onDestinationSelectHandler} />
+		<ScrollView
+			keyboardShouldPersistTaps="always">
+			<View style={styles.container}>
+				<View style={{ ...styles.inputContainer }}>
+					<PlacesSearchInput placeHolder="Search Start Place..." place={onOriginHandler} />
+					<PlacesSearchInput placeHolder="Search Destination Place..." place={onDestinationSelectHandler} />
+				</View>
+				<View style={styles.buttonContainer}>
+					<Button
+						title="Go"
+						color={Platform.OS === 'android' ? 'red' : 'white'}
+						onPress={() => props.navigation.navigate('Map', { pickedOriginSelectLocation: selectPickedLocation, pickedDestSelectLocation: selectDesignation })}
+					/>
+				</View>
+				<View style={styles.inputContainer}>
+					<PlacesSearchInput placeHolder="Search Destination Place..." place={onDestinationHandler} />
+				</View>
+				<View style={styles.buttonContainer}>
+					<Button
+						title="Go"
+						color={Platform.OS === 'android' ? 'blue' : 'white'}
+						onPress={() => props.navigation.navigate('Map', { pickedOriginLocation: pickedLocation, pickedDestLocation: designation })}
+					/>
+				</View>
 			</View>
-			<View style={styles.buttonContainer}>
-				<Button
-					title="Go"
-					color={Platform.OS === 'android' ? 'red' : 'white'}
-					onPress={() => props.navigation.navigate('Map', { pickedOriginSelectLocation: selectPickedLocation, pickedDestSelectLocation: selectDesignation })}
-				/>
-			</View>
-			<View style={styles.inputContainer}>
-				<PlacesSearchInput placeHolder="Search Destination Place..." place={onDestinationHandler} />
-			</View>
-			<View style={styles.buttonContainer}>
-				<Button
-					title="Go"
-					color={Platform.OS === 'android' ? 'blue' : 'white'}
-					onPress={() => props.navigation.navigate('Map', { pickedOriginLocation: pickedLocation, pickedDestLocation: designation })}
-				/>
-			</View>
-		</View>
+		</ScrollView>
 	);
 };
 
