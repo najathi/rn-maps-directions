@@ -82,19 +82,19 @@ const MapViewScreen = props => {
 				region={mapRegion}
 				provider="google"
 				zoomEnabled={true} >
-				{pickedLocation && destination ? < View >
-					<Marker title="Origin Location" coordinate={originLocation} />
-					<Marker title="Destination Location" coordinate={destinationLocation} />
-					<MapViewDirections
-						origin={originLocation}
-						destination={destinationLocation}
-						apikey={ENV().googleApiKey}
-						strokeWidth={4}
-						strokeColor="hotpink"
-						mode='DRIVING'
-
-					/>
-				</View> : null}
+				{pickedLocation && destination ?
+					< View >
+						<Marker title="Origin Location" coordinate={originLocation} />
+						<Marker title="Destination Location" coordinate={destinationLocation} />
+						<MapViewDirections
+							origin={originLocation}
+							destination={destinationLocation}
+							apikey={ENV().googleApiKey}
+							strokeWidth={4}
+							strokeColor="hotpink"
+							mode='DRIVING'
+						/>
+					</View> : null}
 			</MapView>
 			<TouchableNative styleTouchable={styles.textContainer} onPressed={locationPickedHandler}>
 				<Ionicons name="md-locate" size={30} />
