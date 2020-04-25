@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
@@ -20,9 +20,6 @@ const MapViewScreen = props => {
 	const [pickedLocation, setPickedLocation] = useState();
 	const [destination, setDestination] = useState();
 
-	console.log('pickedLocation', pickedLocation);
-	console.log('destination', destination);
-
 	const mapRegion = {
 		latitude: pickedLocation ? pickedLocation.lat : 6.902725,
 		longitude: pickedLocation ? pickedLocation.lng : 79.899389,
@@ -43,33 +40,6 @@ const MapViewScreen = props => {
 			longitude: destination.geometry.location.lng
 		};
 	}
-
-	useEffect(() => {
-		if (Platform.OS === 'android' && !Constants.isDevice) {
-			setErrorMsg(
-				'Oops, this will not work on Sketch in an Android emulator. Try it on your device!'
-			);
-		} else {
-			(async () => {
-				let { status } = await Location.requestPermissionsAsync();
-				if (status !== 'granted') {
-					Alert.alert('Insufficient permissions!', 'You need to grant location permissions to use this app.', [{ text: 'Okay' }]);
-				}
-
-				try {
-					let location = await Location.getCurrentPositionAsync({});
-					setPickedLocation({
-						lat: location.coords.latitude,
-						lng: location.coords.longitude,
-					});
-				}
-				catch (err) {
-					Alert.alert('Could not fetch location!', 'Please try again later or pick a location on the map.', [{ text: 'Okay' }]);
-				}
-
-			})();
-		}
-	}, []);
 
 	const onDestinationHandler = coordinate => {
 		setDestination(coordinate);

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, Keyboard } from 'react-native';
 
 import PlacesInput from 'react-native-places-input';
 import ENV from '../env';
@@ -8,6 +8,7 @@ const PlacesSearchInput = props => {
 
 	const onChange = place => {
 		props.place(place.result);
+		Keyboard.dismiss();
 	}
 
 	return (
